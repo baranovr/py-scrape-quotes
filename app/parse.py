@@ -1,8 +1,10 @@
 import csv
 import re
 import time
+import requests
+from bs4 import BeautifulSoup
 
-from app.settings import *
+from app.settings import Quote, soup, BASE_URL
 
 
 def parse_one_quote(quote_soup: BeautifulSoup) -> Quote:

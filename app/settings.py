@@ -13,5 +13,4 @@ class Quote:
 BASE_URL = "https://quotes.toscrape.com/"
 
 page = requests.get(BASE_URL).content
-
 soup = BeautifulSoup(page, "html.parser")
