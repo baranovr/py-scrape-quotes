@@ -1,25 +1,8 @@
 import csv
 import re
 import time
-import requests
 
-from dataclasses import dataclass
-
-from bs4 import BeautifulSoup
-
-
-BASE_URL = "https://quotes.toscrape.com/"
-
-
-@dataclass
-class Quote:
-    text: str
-    author: str
-    tags: list[str]
-
-
-page = requests.get(BASE_URL).content
-soup = BeautifulSoup(page, "html.parser")
+from app.settings import *
 
 
 def parse_one_quote(quote_soup: BeautifulSoup) -> Quote:
@@ -87,7 +70,7 @@ def write_quotes_to_file(quotes: list[Quote], output_csv_path: str) -> None:
     print("\nWriting the parsed quotes to .csv finished.")
 
 
-def main() -> None:
+def main(output_csv_path: str) -> None:
     print("=== Parsing Quotes ===")
     print("Parsing quotes...\n")
     quotes = parse_quotes()
@@ -96,11 +79,11 @@ def main() -> None:
         "-------------------------------------\n"
         "Writing parsed quotes to .csv file...\n"
     )
-    write_quotes_to_file(quotes, "quotes.csv")
+    write_quotes_to_file(quotes, output_csv_path)
 
 
 if __name__ == "__main__":
     start = time.perf_counter()
-    main()
+    main("quotes.csv")
     end = time.perf_counter()
     print(f"\nSpent time: {end - start}")
