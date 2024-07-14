@@ -1,10 +1,9 @@
 import csv
-import re
 import time
 import requests
 from bs4 import BeautifulSoup
 
-from app.settings import Quote, soup, BASE_URL
+from app.settings import Quote, BASE_URL
 
 
 def parse_one_quote(quote_soup: BeautifulSoup) -> Quote:
@@ -63,7 +62,9 @@ def main(output_csv_path: str) -> None:
     print("Parsing quotes...\n")
     quotes = parse_quotes()
     print(
-        "-------------------------------------\nWriting parsed quotes to .csv file...\n")
+        "-------------------------------------\n"
+        "Writing parsed quotes to .csv file...\n"
+    )
     write_quotes_to_file(quotes, output_csv_path)
 
 
